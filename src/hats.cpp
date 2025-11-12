@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <cstdio>
+#include <opencv4/opencv2/opencv.hpp>
 
 typedef struct {
     uint32_t event_count;             // number of events processed in this cell
@@ -27,6 +28,9 @@ typedef struct {
     std::vector<Cell_t*> cells;       // array of cell pointers
     std::vector<Event_t*> events;     // event buffer to process
     std::vector<double> normalized_hist; // final concatenated HATS descriptor
+
+    std::vector<double> last_ts_on;
+    std::vector<double> last_ts_off;
 } HATS_Context_t;
 
 // Initialize context with sensor and algorithm parameters
@@ -46,6 +50,10 @@ void context_init(HATS_Context_t *ctx, uint32_t width, uint32_t height,
     // initialize cells with nullptrs
     ctx->cells = std::vector<Cell_t*>(ctx->cells_area, nullptr);
     ctx->normalized_hist.clear();
+
+    ctx->last_ts_on  = std::vector<double>(ctx->area, -1.0);
+    ctx->last_ts_off = std::vector<double>(ctx->area, -1.0);
+
 
     ctx->rho = rho;
     ctx->delta = delta;
@@ -147,10 +155,39 @@ void prune_memory(Cell_t* cell, double t_now, double delta) {
     cell->memory.resize(write);
 }
 
+void display_time_surface(HATS_Context_t *ctx, double t0) {
+    cv::Mat img(ctx->height, ctx->width, CV_8UC1);
+
+    for (uint32_t y = 0; y < ctx->height; ++y) {
+        for (uint32_t x = 0; x < ctx->width; ++x) {
+
+            double t_last = std::max(ctx->last_ts_on[y * ctx->width + x], ctx->last_ts_off[y * ctx->width + x]);
+            double dt = t0 - t_last;
+            double val = std::exp(- dt / ctx->tau);
+            uint8_t pix = (uint8_t)(255.0 * std::min(val,1.0));
+            img.at<uchar>(y,x) = pix;
+
+        }
+    }
+
+
+    cv::namedWindow("LMTS Full Frame", cv::WINDOW_NORMAL);
+    cv::resizeWindow("LMTS Full Frame", 1000, 1000);
+    cv::imshow("LMTS Full Frame", img);
+    cv::waitKey(0);
+}
+
 // Main HATS pipeline: iterate over events, update cells, build features
 void process(HATS_Context_t *ctx)
 {
     for (Event_t *event : ctx->events) {
+
+        size_t pixel_index = event->y * ctx->width + event->x;
+        if (event->pol == 1) {
+            ctx->last_ts_on[pixel_index] = event->t;
+        } else {
+            ctx->last_ts_off[pixel_index] = event->t;
+        }
 
         size_t x_id = event->x / ctx->cell_dim;
         size_t y_id = event->y / ctx->cell_dim;
@@ -174,6 +211,9 @@ void process(HATS_Context_t *ctx)
 
         prune_memory(current_cell, event->t, ctx->delta);
     }
+
+    double t0 = ctx->events.back()->t;
+    display_time_surface(ctx, t0);
 
     normalize_histograms(ctx);
 }
