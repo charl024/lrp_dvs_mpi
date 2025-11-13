@@ -2,6 +2,12 @@
 ## What is this?
 This is a demonstration of how parallelism can be applied processing asynchronous event data streams from a neuromorphic vision sensor through MPI.
 
-## References
-HATS: Histograms of Averaged Time Surfaces for Robust Event-based Object Classification
-A. Sironi, M. Brambilla, N. Bourdis, X. Lagorce, and R. Benosman, “HATS: Histograms of Averaged Time Surfaces for Robust Event-Based Object Classification,” Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), pp. 1731–1740, 2018.
+### References
+
+**Gao, Yue, et al.**  
+*Action Recognition and Benchmark Using Event Cameras.*  
+IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 45, no. 12, 2023, pp. 14081–14097.
+
+**Gao, Yue, et al.**  
+*Hypergraph-Based Multi-View Action Recognition Using Event Cameras.*  
+IEEE Transactions on Pattern Analysis and Machine Intelligence, 2024.
