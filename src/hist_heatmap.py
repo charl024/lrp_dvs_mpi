@@ -1,6 +1,6 @@
 import numpy as np
 
-events = np.load("/users/comaoeng/CS542/datasets/THU-EACT-50-CHL/A62P20C3-2021_11_06_18_33_41.npy")
+events = np.load("test_data/A62P20C3-2021_11_06_18_33_41.npy")
 batch_size = 10000
 for i in range(0, len(events), batch_size):
     batch = events[i:i+batch_size]
