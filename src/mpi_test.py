@@ -10,11 +10,15 @@ def main():
         events = np.load("test_data/A62P20C3-2021_11_06_18_33_41.npy")
         N = events.shape
 
+        print(f"Successfully loaded {N} events")
+
         chunks = np.array_split(events, size)
     else:
         chunks = None
         N = None
 
+    comm.Barrier()
+    
     N = comm.bcast(N, root=0)
 
     local_events = comm.scatter(chunks, root=0)
@@ -23,8 +27,8 @@ def main():
 
     max_events = 5
 
-    for i, event in enumerate(local_events[:max_events]):
-        print(f"Rank {rank}: event[{i}] = {event}")
+    #for i, event in enumerate(local_events[:max_events]):
+    #    print(f"Rank {rank}: event[{i}] = {event}")
 
     comm.Barrier()
     
