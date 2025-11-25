@@ -4,8 +4,8 @@ import numpy as np
 W = 640
 H = 480
 
-Pw = 1
-Ph = 4
+Pw = 2
+Ph = 2
 
 region_width  = W // Pw
 region_height = H // Ph
@@ -19,7 +19,7 @@ def main():
 
     if Pw * Ph != size:
         if rank == 0:
-            print("Error: Pw * Ph must equal number of processes")
+            print("Error: Num Processes must equal ", Pw * Ph)
         return
 
     rx = rank % Pw
@@ -76,7 +76,7 @@ def main():
                 break
 
             # print(f"Rank {rank}: received {len(local_data)} events")
-            local_count = len(local_data)
+            # process one packet
 
     comm.Barrier()
     if rank == 0:
