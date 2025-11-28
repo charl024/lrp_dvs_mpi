@@ -66,6 +66,8 @@ def main():
         # print(f"Rank 0: processed {local_count} events locally")
 
     else:
+
+        
         while True:
             status = MPI.Status()
             local_data = comm.recv(source=0, tag=MPI.ANY_TAG, status=status)

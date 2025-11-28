@@ -11,3 +11,7 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 45, no. 12,
 **Gao, Yue, et al.**  
 *Hypergraph-Based Multi-View Action Recognition Using Event Cameras.*  
 IEEE Transactions on Pattern Analysis and Machine Intelligence, 2024.
+
+https://arxiv.org/html/2503.12905v1
+
+https://spritea.github.io/DET/
