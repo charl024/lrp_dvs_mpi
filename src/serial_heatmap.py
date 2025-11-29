@@ -3,18 +3,9 @@ import processing as prc
 import matplotlib.pyplot as plt
 import time
 
-W = 346
-H = 260
+def serial_heatmap(events, width, height, packet_size=1000, display=False):
 
-packet_size = 1000
-
-def main():
-    events = np.load("test_data/A62P20C3-2021_11_06_18_33_41.npy")
-
-    print(f"Loaded {len(events)} events")
-    print(f"Packet Size: {packet_size}")
-
-    heatmap = np.zeros((H, W), dtype=np.int32)
+    heatmap = np.zeros((height, width), dtype=np.int32)
 
     # start time
     start_time = time.perf_counter()
@@ -28,8 +19,8 @@ def main():
             heatmap=heatmap, 
             x_start=0, 
             y_start=0, 
-            width=W, 
-            height=H
+            width=width, 
+            height=height
         )
 
     # end time
@@ -37,14 +28,14 @@ def main():
     total_time = end_time - start_time
     print(f"[TIME] Serial heatmap time: {total_time:.6f} seconds")
 
+    if not display:
+        return
+
     plt.figure(figsize=(8, 6))
-    plt.imshow(heatmap, cmap='hot', interpolation='nearest')
-    plt.colorbar(label="Event Count")
+    heatmap_log = np.log1p(heatmap)
+    plt.imshow(heatmap_log, cmap="hot")
+    plt.colorbar()
     plt.title("Event Heatmap (Serial)")
     plt.xlabel("X")
     plt.ylabel("Y")
     plt.show()
-
-
-if __name__ == "__main__":
-    main()

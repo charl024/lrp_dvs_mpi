@@ -18,3 +18,6 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, 2024.
 **Delbruck, Tobi.**  
 *Frame-free dynamic digital vision.*  
 Proceedings of the International Symposium on Secure-Life Electronics, Advanced Electronics for Quality Life and Society, University of Tokyo, Tokyo, Japan, March 6–7, 2008, pp. 21–26.
+
+**Qian, Yuanbin; Ye, Shuhan; Wang, Chong; Cai, Xiaojie; Qian, Jiangbo; Wu, Jiafei.**  
+*UCF-Crime-DVS: A Novel Event-Based Dataset for Video Anomaly Detection with Spiking Neural Networks.*
