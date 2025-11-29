@@ -1,6 +1,6 @@
 # Local Region Parallelism in Dynamic Vision Sensors using MPI
 ## What is this?
-This is a demonstration of how parallelism can be applied processing asynchronous event data streams from a neuromorphic vision sensor through MPI.
+This is a demonstration of how parallelism can be applied processing asynchronous event data streams from a neuromorphic vision sensor using MPI. In this project, we simulate an incoming stream of event packets from a sensor by iterating through an event-based dataset and applying different types of processing approaches for each packet.
 
 ### References
 
@@ -12,6 +12,9 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 45, no. 12,
 *Hypergraph-Based Multi-View Action Recognition Using Event Cameras.*  
 IEEE Transactions on Pattern Analysis and Machine Intelligence, 2024.
 
-https://arxiv.org/html/2503.12905v1
+**Sironi, Amos; Brambilla, Manuele; Bourdis, Nicolas; Lagorce, Xavier; Benosman, Ryad.**  
+*HATS: Histograms of Averaged Time Surfaces for Robust Event-based Object Classification.* 2018. DOI: 10.1109/CVPR.2018.00186
 
-https://spritea.github.io/DET/
+**Delbruck, Tobi.**  
+*Frame-free dynamic digital vision.*  
+Proceedings of the International Symposium on Secure-Life Electronics, Advanced Electronics for Quality Life and Society, University of Tokyo, Tokyo, Japan, March 6–7, 2008, pp. 21–26.
