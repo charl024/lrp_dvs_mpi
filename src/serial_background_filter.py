@@ -6,7 +6,7 @@ W = 346
 H = 260
 
 packet_size = 1000
-T_thresh = 1e-2
+T_thresh = 2000.0
 
 # convert events into a heatmap for visualization
 def transform_to_heatmap(filtered_data, width, height):
@@ -47,6 +47,7 @@ def main():
             height=H,
             T_thresh=T_thresh
         )
+        
         filtered.append(out)
     
     filtered = np.concatenate(filtered, axis=0)
