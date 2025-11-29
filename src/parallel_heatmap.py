@@ -2,6 +2,7 @@ from mpi4py import MPI
 import numpy as np
 import processing as prc
 import matplotlib.pyplot as plt
+import time
 
 W = 346
 H = 260
@@ -33,16 +34,19 @@ def main():
     y_start = ry * region_height
     y_end = (ry + 1) * region_height if ry != Ph - 1 else H
 
-    print(f"Rank {rank} owns region x[{x_start}:{x_end}], y[{y_start}:{y_end}]")
+    # print(f"Rank {rank} owns region x[{x_start}:{x_end}], y[{y_start}:{y_end}]")
 
     if rank == 0:
         events = np.load("test_data/A62P20C3-2021_11_06_18_33_41.npy")
-
         print(f"Rank 0: loaded {len(events)} events")
         print(f"Rank 0: distributing events in packets of {packet_size}")
 
-        local_count = 0
+    comm.Barrier()
+    start_time = MPI.Wtime()
 
+    if rank == 0:
+
+        # simulate packet stream
         for i in range(0, len(events), packet_size):
             packet = events[i:i+packet_size]
 
@@ -93,7 +97,7 @@ def main():
             current_tag = status.Get_tag()
 
             if current_tag == 1:
-                print(f"Rank {rank}: received end of data stream signal")
+                # print(f"Rank {rank}: received end of data stream signal")
                 break
 
             # process one packet
@@ -113,13 +117,19 @@ def main():
 
     comm.Gather(local_heatmap, recvbuf, root=0)
 
+    comm.Barrier()
+    end_time = MPI.Wtime()
+
     # plt.imshow(local_heatmap, cmap="hot")
     # plt.title(f"Rank {rank} Heatmap")
     # plt.colorbar()
     # plt.show()
 
-    # create full_heatmap and then display
+    # calculate total time taken to process, create full_heatmap and then display
     if rank == 0:
+        total_time = end_time - start_time
+        print(f"[TIME] Total MPI pipeline time: {total_time:.6f} seconds")
+
         full_heatmap = np.zeros((H, W), dtype=np.int32)
 
         for r in range(size):

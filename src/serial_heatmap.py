@@ -1,6 +1,7 @@
 import numpy as np
 import processing as prc
 import matplotlib.pyplot as plt
+import time
 
 W = 346
 H = 260
@@ -15,6 +16,10 @@ def main():
 
     heatmap = np.zeros((H, W), dtype=np.int32)
 
+    # start time
+    start_time = time.perf_counter()
+
+    # simulate packet stream
     for i in range(0, len(events), packet_size):
         packet = events[i:i+packet_size]
         
@@ -26,6 +31,11 @@ def main():
             width=W, 
             height=H
         )
+
+    # end time
+    end_time = time.perf_counter()
+    total_time = end_time - start_time
+    print(f"[TIME] Serial heatmap time: {total_time:.6f} seconds")
 
     plt.figure(figsize=(8, 6))
     plt.imshow(heatmap, cmap='hot', interpolation='nearest')
