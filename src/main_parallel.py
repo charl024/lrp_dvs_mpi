@@ -30,51 +30,51 @@ def main():
     small_cam_events = get_dataset(small_cam_dataset_path)
     large_cam_events = get_dataset(large_cam_dataset_path)
 
-    # parallel_heatmap(
-    #     small_cam_events, 
-    #     width_small, 
-    #     height_small,
-    #     process_width,
-    #     process_height,
-    #     packet_size, 
-    #     display=display,
-    #     id=1
-    # )
+    parallel_heatmap(
+        small_cam_events, 
+        width_small, 
+        height_small,
+        process_width,
+        process_height,
+        packet_size, 
+        display=display,
+        id=1
+    )
 
-    # parallel_heatmap(
-    #     large_cam_events, 
-    #     width_large, 
-    #     height_large,
-    #     process_width,
-    #     process_height,
-    #     packet_size, 
-    #     display=display,
-    #     id=2
-    # )
+    parallel_heatmap(
+        large_cam_events, 
+        width_large, 
+        height_large,
+        process_width,
+        process_height,
+        packet_size, 
+        display=display,
+        id=2
+    )
 
-    # parallel_background_filter(
-    #     small_cam_events, 
-    #     width_small, 
-    #     height_small,
-    #     process_width,
-    #     process_height,
-    #     packet_size, 
-    #     T_thresh=1000.0, 
-    #     display=display,
-    #     id=1
-    # )
+    parallel_background_filter(
+        small_cam_events, 
+        width_small, 
+        height_small,
+        process_width,
+        process_height,
+        packet_size, 
+        T_thresh=1000.0, 
+        display=display,
+        id=1
+    )
 
-    # parallel_background_filter(
-    #     large_cam_events, 
-    #     width_large, 
-    #     height_large, 
-    #     process_width,
-    #     process_height,
-    #     packet_size, 
-    #     T_thresh=1000.0, 
-    #     display=display,
-    #     id=2
-    # )
+    parallel_background_filter(
+        large_cam_events, 
+        width_large, 
+        height_large, 
+        process_width,
+        process_height,
+        packet_size, 
+        T_thresh=1000.0, 
+        display=display,
+        id=2
+    )
 
     parallel_hats(
         small_cam_events,
