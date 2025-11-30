@@ -13,7 +13,7 @@ def main():
     width_large, height_large = 1280, 720
     width_small, height_small = 346, 260
 
-    display = True
+    display = False
 
     small_cam_dataset_path = "test_data/A62P20C3-2021_11_06_18_33_41.npy"
     large_cam_dataset_path = "test_data/Normal_Videos_003_x264.npz"

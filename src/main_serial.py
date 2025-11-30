@@ -18,49 +18,49 @@ def main():
     small_cam_events = get_dataset(small_cam_dataset_path)
     large_cam_events = get_dataset(large_cam_dataset_path)
 
-    # serial_heatmap(
-    #     small_cam_events, 
-    #     width_small, 
-    #     height_small, 
-    #     packet_size, 
-    #     display=display
-    # )
+    serial_heatmap(
+        small_cam_events, 
+        width_small, 
+        height_small, 
+        packet_size, 
+        display=display
+    )
 
-    # serial_heatmap(
-    #     large_cam_events, 
-    #     width_large, 
-    #     height_large, 
-    #     packet_size, 
-    #     display=display
-    # )
+    serial_heatmap(
+        large_cam_events, 
+        width_large, 
+        height_large, 
+        packet_size, 
+        display=display
+    )
 
-    # serial_background_filter(
-    #     small_cam_events, 
-    #     width_small, 
-    #     height_small, 
-    #     packet_size, 
-    #     T_thresh=1000.0, 
-    #     display=display
-    # )
+    serial_background_filter(
+        small_cam_events, 
+        width_small, 
+        height_small, 
+        packet_size, 
+        T_thresh=1000.0, 
+        display=display
+    )
 
-    # serial_background_filter(
-    #     large_cam_events, 
-    #     width_large, 
-    #     height_large, 
-    #     packet_size, 
-    #     T_thresh=1000.0, 
-    #     display=display
-    # )
+    serial_background_filter(
+        large_cam_events, 
+        width_large, 
+        height_large, 
+        packet_size, 
+        T_thresh=1000.0, 
+        display=display
+    )
 
-    # serial_hats(
-    #     small_cam_events,
-    #     width_small,
-    #     height_small,
-    #     packet_size=packet_size,
-    #     tau=0.02,
-    #     block_size=32,
-    #     display=True
-    # )
+    serial_hats(
+        small_cam_events,
+        width_small,
+        height_small,
+        packet_size=packet_size,
+        tau=0.02,
+        block_size=32,
+        display=True
+    )
 
     serial_hats(
         large_cam_events,

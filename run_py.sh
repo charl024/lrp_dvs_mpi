@@ -1,15 +1,15 @@
 #!/bin/bash
-#SBATCH --job-name=EB_Test
+#SBATCH --job-name=EB_Test_single
 #SBATCH --partition=general
-#SBATCH --nodes=2
-#SBATCH --ntasks-per-node=32
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
 #SBATCH --time=00:30:00
-#SBATCH --output=./out/EB_test_%j.out
-#SBATCH --error=./out/EB_test_%j.err
+#SBATCH --output=./out/EB_test_single_%j.out
+#SBATCH --error=./out/EB_test_single_%j.err
 
 module load miniconda3
-module load openmpi
 
 source $(conda info --base)/etc/profile.d/conda.sh
+conda activate dv
 
-mpirun -n 64 python ./src/main_parallel.py
+python ./src/main_serial.py
