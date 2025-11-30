@@ -138,6 +138,16 @@ def parallel_background_filter(events, width, height, process_width, process_hei
 
         full_filtered_heatmap = transform_to_heatmap(filtered, width, height)
         full_filtered_heatmap_log = np.log1p(full_filtered_heatmap)
-        plt.imshow(full_filtered_heatmap_log, cmap="hot")
-        plt.colorbar()
-        plt.show()
+        # visualization
+        plt.imshow(
+            filtered_heatmap_log,
+            cmap="hot",
+            extent=[0, width, height, 0]
+        )
+
+        plt.colorbar(label="Event Density")
+        plt.title("Filtered Event Heatmap")
+        plt.xlabel("X coordinate (pixels)")
+        plt.ylabel("Y coordinate (pixels)")
+        plt.tight_layout()
+        plt.savefig("plots/parallel/mpi_background_filter_out.svg")

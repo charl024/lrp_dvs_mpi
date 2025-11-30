@@ -124,10 +124,17 @@ def parallel_hats(events, width, height, process_width, process_height, block_si
         hats_sum = hats_pos + hats_neg
 
         plt.figure(figsize=(8, 6))
-        plt.title("HATS Descriptor (MPI, Block-Averaged Time Surface)")
-        hats_sum_log = np.log1p(hats_sum)
-        plt.imshow(hats_sum_log, cmap="hot")
-        plt.colorbar(label="HATS Value")
-        plt.xlabel("HATS Block X")
-        plt.ylabel("HATS Block Y")
-        plt.show()
+        plt.figure(figsize=(8, 6))
+
+        plt.imshow(
+            hats_sum,
+            cmap="hot",
+            extent=[0, n_cells_x, n_cells_y, 0]
+        )
+
+        plt.colorbar(label="HATS Intensity")
+        plt.title("HATS Descriptor (Block-Averaged Time Surface)")
+        plt.xlabel("Block X Index")
+        plt.ylabel("Block Y Index")
+        plt.tight_layout()
+        plt.savefig("plots/parallel/mpi_hats_out.svg")

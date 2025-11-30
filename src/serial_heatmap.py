@@ -32,11 +32,19 @@ def serial_heatmap(events, width, height, packet_size=1000, display=False):
     if not display:
         return
 
+    # visualization
     plt.figure(figsize=(8, 6))
     heatmap_log = np.log1p(heatmap)
-    plt.imshow(heatmap_log, cmap="hot")
-    plt.colorbar()
-    plt.title("Event Heatmap (Serial)")
-    plt.xlabel("X")
-    plt.ylabel("Y")
-    plt.show()
+
+    plt.imshow(
+        heatmap_log,
+        cmap="hot",
+        extent=[0, width, 0, height]
+    )
+
+    plt.colorbar(label="Event Density")
+    plt.title("Event Heatmap")
+    plt.xlabel("X coordinate (pixels)")
+    plt.ylabel("Y coordinate (pixels)")
+    plt.tight_layout()
+    plt.savefig("plots/serial/heatmap_out.svg")

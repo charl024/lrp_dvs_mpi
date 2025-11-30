@@ -58,11 +58,20 @@ def serial_background_filter(events, width, height, packet_size=1000, T_thresh=2
 
     # convert to heatmap for display
     filtered_heatmap = transform_to_heatmap(filtered_data=filtered, width=width, height=height)
+
     plt.figure(figsize=(8, 6))
     filtered_heatmap_log = np.log1p(filtered_heatmap)
-    plt.imshow(filtered_heatmap_log, cmap="hot")
-    plt.colorbar(label="Event Count")
-    plt.title("Filtered Event Heatmap (Serial)")
-    plt.xlabel("X")
-    plt.ylabel("Y")
-    plt.show()    
+
+    # visualization
+    plt.imshow(
+        filtered_heatmap_log,
+        cmap="hot",
+        extent=[0, width, height, 0]
+    )
+
+    plt.colorbar(label="Event Density")
+    plt.title("Filtered Event Heatmap")
+    plt.xlabel("X coordinate (pixels)")
+    plt.ylabel("Y coordinate (pixels)")
+    plt.tight_layout()
+    plt.savefig("plots/serial/background_filter_out.svg")

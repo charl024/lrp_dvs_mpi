@@ -45,8 +45,16 @@ def serial_hats(events, width, height, packet_size=1000, tau=0.02, rho=2, block_
     hats_sum = hats_pos + hats_neg
 
     plt.figure(figsize=(8, 6))
+
+    plt.imshow(
+        hats_sum,
+        cmap="hot",
+        extent=[0, n_cells_x, n_cells_y, 0]
+    )
+
+    plt.colorbar(label="HATS Intensity")
     plt.title("HATS Descriptor (Block-Averaged Time Surface)")
-    # plt.subplot(1, 3, 3)
-    plt.imshow(hats_sum, cmap="hot")
-    plt.colorbar()
-    plt.show()
+    plt.xlabel("Block X Index")
+    plt.ylabel("Block Y Index")
+    plt.tight_layout()
+    plt.savefig("plots/serial/hats_out.svg")

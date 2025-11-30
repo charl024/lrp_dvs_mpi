@@ -122,7 +122,19 @@ def parallel_heatmap(events, width, height, process_width, process_height, packe
 
             full_heatmap[y0:y0+region_height, x0:x0+region_width] = recvbuf[r]
 
-        full_heatmap_log = np.log1p(full_heatmap)
-        plt.imshow(full_heatmap_log, cmap="hot")
-        plt.colorbar()
-        plt.show()
+        # visualization
+        plt.figure(figsize=(8, 6))
+        heatmap_log = np.log1p(full_heatmap)
+
+        plt.imshow(
+            heatmap_log,
+            cmap="hot",
+            extent=[0, width, 0, height]
+        )
+
+        plt.colorbar(label="Event Density")
+        plt.title("Event Heatmap")
+        plt.xlabel("X coordinate (pixels)")
+        plt.ylabel("Y coordinate (pixels)")
+        plt.tight_layout()
+        plt.savefig("plots/parallel/mpi_heatmap_out.svg")
