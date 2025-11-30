@@ -19,7 +19,7 @@ def transform_to_heatmap(filtered_data, width, height):
 
     return filtered_heatmap
 
-def parallel_background_filter(events, width, height, process_width, process_height, packet_size=1000, T_thresh=2000.0, display=False):    
+def parallel_background_filter(events, width, height, process_width, process_height, packet_size=1000, T_thresh=2000.0, display=False, id=1):    
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     size = comm.Get_size()
@@ -140,7 +140,7 @@ def parallel_background_filter(events, width, height, process_width, process_hei
         full_filtered_heatmap_log = np.log1p(full_filtered_heatmap)
         # visualization
         plt.imshow(
-            filtered_heatmap_log,
+            full_filtered_heatmap_log,
             cmap="hot",
             extent=[0, width, height, 0]
         )
@@ -150,4 +150,5 @@ def parallel_background_filter(events, width, height, process_width, process_hei
         plt.xlabel("X coordinate (pixels)")
         plt.ylabel("Y coordinate (pixels)")
         plt.tight_layout()
-        plt.savefig("plots/parallel/mpi_background_filter_out.svg")
+        plt.savefig(f"plots/parallel/mpi_background_filter_out{id}.svg")
+        plt.close()

@@ -4,7 +4,7 @@ import processing as prc
 import matplotlib.pyplot as plt
 import time
 
-def parallel_hats(events, width, height, process_width, process_height, block_size=32, packet_size=1000, tau=0.02, rho=2, display=False):
+def parallel_hats(events, width, height, process_width, process_height, block_size=32, packet_size=1000, tau=0.02, rho=2, display=False, id=1):
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     size = comm.Get_size()
@@ -137,4 +137,5 @@ def parallel_hats(events, width, height, process_width, process_height, block_si
         plt.xlabel("Block X Index")
         plt.ylabel("Block Y Index")
         plt.tight_layout()
-        plt.savefig("plots/parallel/mpi_hats_out.svg")
+        plt.savefig(f"plots/parallel/mpi_hats_out{id}.svg")
+        plt.close()

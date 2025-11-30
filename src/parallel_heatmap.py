@@ -4,7 +4,7 @@ import processing as prc
 import matplotlib.pyplot as plt
 import time
 
-def parallel_heatmap(events, width, height, process_width, process_height, packet_size=1000, display=False):
+def parallel_heatmap(events, width, height, process_width, process_height, packet_size=1000, display=False, id=1):
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     size = comm.Get_size()
@@ -137,4 +137,5 @@ def parallel_heatmap(events, width, height, process_width, process_height, packe
         plt.xlabel("X coordinate (pixels)")
         plt.ylabel("Y coordinate (pixels)")
         plt.tight_layout()
-        plt.savefig("plots/parallel/mpi_heatmap_out.svg")
+        plt.savefig(f"plots/parallel/mpi_heatmap_out{id}.svg")
+        plt.close()

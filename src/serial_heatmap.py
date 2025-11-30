@@ -3,7 +3,7 @@ import processing as prc
 import matplotlib.pyplot as plt
 import time
 
-def serial_heatmap(events, width, height, packet_size=1000, display=False):
+def serial_heatmap(events, width, height, packet_size=1000, display=False, id=1):
 
     # heatmap
     heatmap = np.zeros((height, width), dtype=np.int32)
@@ -47,4 +47,5 @@ def serial_heatmap(events, width, height, packet_size=1000, display=False):
     plt.xlabel("X coordinate (pixels)")
     plt.ylabel("Y coordinate (pixels)")
     plt.tight_layout()
-    plt.savefig("plots/serial/heatmap_out.svg")
+    plt.savefig(f"plots/serial/heatmap_out{id}.svg")
+    plt.close()

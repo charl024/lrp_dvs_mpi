@@ -10,7 +10,7 @@ def main():
     width_large, height_large = 1280, 720
     width_small, height_small = 346, 260
 
-    display = False
+    display = True
 
     small_cam_dataset_path = "test_data/A62P20C3-2021_11_06_18_33_41.npy"
     large_cam_dataset_path = "test_data/Normal_Videos_003_x264.npz"
@@ -23,7 +23,8 @@ def main():
         width_small, 
         height_small, 
         packet_size, 
-        display=display
+        display=display,
+        id=1
     )
 
     serial_heatmap(
@@ -31,7 +32,8 @@ def main():
         width_large, 
         height_large, 
         packet_size, 
-        display=display
+        display=display,
+        id=2
     )
 
     serial_background_filter(
@@ -40,7 +42,8 @@ def main():
         height_small, 
         packet_size, 
         T_thresh=1000.0, 
-        display=display
+        display=display,
+        id=1
     )
 
     serial_background_filter(
@@ -49,7 +52,8 @@ def main():
         height_large, 
         packet_size, 
         T_thresh=1000.0, 
-        display=display
+        display=display,
+        id=2
     )
 
     serial_hats(
@@ -59,7 +63,8 @@ def main():
         packet_size=packet_size,
         tau=0.02,
         block_size=32,
-        display=display
+        display=display,
+        id=1
     )
 
     serial_hats(
@@ -69,7 +74,8 @@ def main():
         packet_size=packet_size,
         tau=0.02,
         block_size=32,
-        display=display
+        display=display,
+        id=2
     )
 
 

@@ -22,7 +22,7 @@ def main():
     width_large, height_large = 1280, 720
     width_small, height_small = 346, 260
 
-    display = False
+    display = True
 
     small_cam_dataset_path = "test_data/A62P20C3-2021_11_06_18_33_41.npy"
     large_cam_dataset_path = "test_data/Normal_Videos_003_x264.npz"
@@ -30,47 +30,51 @@ def main():
     small_cam_events = get_dataset(small_cam_dataset_path)
     large_cam_events = get_dataset(large_cam_dataset_path)
 
-    parallel_heatmap(
-        small_cam_events, 
-        width_small, 
-        height_small,
-        process_width,
-        process_height,
-        packet_size, 
-        display=display
-    )
+    # parallel_heatmap(
+    #     small_cam_events, 
+    #     width_small, 
+    #     height_small,
+    #     process_width,
+    #     process_height,
+    #     packet_size, 
+    #     display=display,
+    #     id=1
+    # )
 
-    parallel_heatmap(
-        large_cam_events, 
-        width_large, 
-        height_large,
-        process_width,
-        process_height,
-        packet_size, 
-        display=display
-    )
+    # parallel_heatmap(
+    #     large_cam_events, 
+    #     width_large, 
+    #     height_large,
+    #     process_width,
+    #     process_height,
+    #     packet_size, 
+    #     display=display,
+    #     id=2
+    # )
 
-    parallel_background_filter(
-        small_cam_events, 
-        width_small, 
-        height_small,
-        process_width,
-        process_height,
-        packet_size, 
-        T_thresh=1000.0, 
-        display=display
-    )
+    # parallel_background_filter(
+    #     small_cam_events, 
+    #     width_small, 
+    #     height_small,
+    #     process_width,
+    #     process_height,
+    #     packet_size, 
+    #     T_thresh=1000.0, 
+    #     display=display,
+    #     id=1
+    # )
 
-    parallel_background_filter(
-        large_cam_events, 
-        width_large, 
-        height_large, 
-        process_width,
-        process_height,
-        packet_size, 
-        T_thresh=1000.0, 
-        display=display
-    )
+    # parallel_background_filter(
+    #     large_cam_events, 
+    #     width_large, 
+    #     height_large, 
+    #     process_width,
+    #     process_height,
+    #     packet_size, 
+    #     T_thresh=1000.0, 
+    #     display=display,
+    #     id=2
+    # )
 
     parallel_hats(
         small_cam_events,
@@ -81,7 +85,8 @@ def main():
         block_size=8,
         packet_size=packet_size,
         tau=0.02,
-        display=display
+        display=display,
+        id=1
     )
 
     parallel_hats(
@@ -94,7 +99,8 @@ def main():
         packet_size=packet_size,
         tau=0.02,
         rho=2,
-        display=display
+        display=display,
+        id=2
     )
 
 

@@ -3,7 +3,7 @@ import processing as prc
 import matplotlib.pyplot as plt
 import time
 
-def serial_hats(events, width, height, packet_size=1000, tau=0.02, rho=2, block_size=32, display=False):
+def serial_hats(events, width, height, packet_size=1000, tau=0.02, rho=2, block_size=32, display=False, id=1):
 
     # number of cells
     n_cells_y = (height + block_size - 1) // block_size
@@ -57,4 +57,5 @@ def serial_hats(events, width, height, packet_size=1000, tau=0.02, rho=2, block_
     plt.xlabel("Block X Index")
     plt.ylabel("Block Y Index")
     plt.tight_layout()
-    plt.savefig("plots/serial/hats_out.svg")
+    plt.savefig(f"plots/serial/hats_out{id}.svg")
+    plt.close()

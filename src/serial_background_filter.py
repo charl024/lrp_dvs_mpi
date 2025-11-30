@@ -20,7 +20,7 @@ def transform_to_heatmap(filtered_data, width, height):
     return filtered_heatmap
 
 
-def serial_background_filter(events, width, height, packet_size=1000, T_thresh=2000.0, display=False):
+def serial_background_filter(events, width, height, packet_size=1000, T_thresh=2000.0, display=False, id=1):
 
     # grid of local timestamps
     local_timestamp = np.full((height, width), -1.0, dtype=np.float64)
@@ -74,4 +74,5 @@ def serial_background_filter(events, width, height, packet_size=1000, T_thresh=2
     plt.xlabel("X coordinate (pixels)")
     plt.ylabel("Y coordinate (pixels)")
     plt.tight_layout()
-    plt.savefig("plots/serial/background_filter_out.svg")
+    plt.savefig(f"plots/serial/background_filter_out{id}.svg")
+    plt.close()
