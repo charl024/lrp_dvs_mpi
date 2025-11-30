@@ -1,7 +1,7 @@
 from parallel_heatmap import parallel_heatmap
 from parallel_background_filter import parallel_background_filter
 from parallel_hats import parallel_hats
-
+import argparse
 from util import get_dataset
 
 def parse_args():
