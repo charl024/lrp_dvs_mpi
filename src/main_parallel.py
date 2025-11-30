@@ -4,11 +4,20 @@ from parallel_hats import parallel_hats
 
 from util import get_dataset
 
-def main():
-    packet_size = 1000
+def parse_args():
+    p = argparse.ArgumentParser()
+    p.add_argument("--process-width", type=int, required=True)
+    p.add_argument("--process-height", type=int, required=True)
+    p.add_argument("--packet-size", type=int, default=1000)
+    return p.parse_args()
 
-    process_width = 8
-    process_height = 8
+def main():
+
+    args = parse_args()
+
+    packet_size = args.packet_size
+    process_width = args.process_width
+    process_height = args.process_height
 
     width_large, height_large = 1280, 720
     width_small, height_small = 346, 260
