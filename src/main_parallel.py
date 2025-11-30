@@ -21,59 +21,59 @@ def main():
     small_cam_events = get_dataset(small_cam_dataset_path)
     large_cam_events = get_dataset(large_cam_dataset_path)
 
-    # parallel_heatmap(
-    #     small_cam_events, 
-    #     width_small, 
-    #     height_small,
-    #     process_width,
-    #     process_height,
-    #     packet_size, 
-    #     display=display
-    #     )
+    parallel_heatmap(
+        small_cam_events, 
+        width_small, 
+        height_small,
+        process_width,
+        process_height,
+        packet_size, 
+        display=display
+    )
 
-    # parallel_heatmap(
-    #     large_cam_events, 
-    #     width_large, 
-    #     height_large,
-    #     process_width,
-    #     process_height,
-    #     packet_size, 
-    #     display=display
-    #     )
+    parallel_heatmap(
+        large_cam_events, 
+        width_large, 
+        height_large,
+        process_width,
+        process_height,
+        packet_size, 
+        display=display
+    )
 
-    # parallel_background_filter(
-    #     small_cam_events, 
-    #     width_small, 
-    #     height_small,
-    #     process_width,
-    #     process_height,
-    #     packet_size, 
-    #     T_thresh=1000.0, 
-    #     display=display
-    #     )
+    parallel_background_filter(
+        small_cam_events, 
+        width_small, 
+        height_small,
+        process_width,
+        process_height,
+        packet_size, 
+        T_thresh=1000.0, 
+        display=display
+    )
 
-    # parallel_background_filter(
-    #     large_cam_events, 
-    #     width_large, 
-    #     height_large, 
-    #     process_width,
-    #     process_height,
-    #     packet_size, 
-    #     T_thresh=1000.0, 
-    #     display=display
-    #     )
+    parallel_background_filter(
+        large_cam_events, 
+        width_large, 
+        height_large, 
+        process_width,
+        process_height,
+        packet_size, 
+        T_thresh=1000.0, 
+        display=display
+    )
 
-    # parallel_hats(
-    #     small_cam_events,
-    #     width_small,
-    #     height_small,
-    #     process_width,
-    #     process_height,
-    #     block_size=8,
-    #     packet_size=packet_size,
-    #     tau=0.02,
-    #     display=display
-    # )
+    parallel_hats(
+        small_cam_events,
+        width_small,
+        height_small,
+        process_width,
+        process_height,
+        block_size=8,
+        packet_size=packet_size,
+        tau=0.02,
+        display=display
+    )
 
     parallel_hats(
         large_cam_events,
