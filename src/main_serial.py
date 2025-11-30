@@ -59,7 +59,7 @@ def main():
         packet_size=packet_size,
         tau=0.02,
         block_size=32,
-        display=True
+        display=display
     )
 
     serial_hats(
@@ -69,7 +69,7 @@ def main():
         packet_size=packet_size,
         tau=0.02,
         block_size=32,
-        display=True
+        display=display
     )
 
 
