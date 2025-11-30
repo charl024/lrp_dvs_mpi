@@ -5,6 +5,7 @@ import time
 
 def serial_heatmap(events, width, height, packet_size=1000, display=False):
 
+    # heatmap
     heatmap = np.zeros((height, width), dtype=np.int32)
 
     # start time
@@ -26,7 +27,7 @@ def serial_heatmap(events, width, height, packet_size=1000, display=False):
     # end time
     end_time = time.perf_counter()
     total_time = end_time - start_time
-    print(f"[TIME] Serial heatmap time: {total_time:.6f} seconds")
+    print(f"[TIME] Serial Heatmap time: {total_time:.6f} seconds")
 
     if not display:
         return

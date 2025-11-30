@@ -41,18 +41,52 @@ def process_background_filter(local_data, local_timestamp, x_start, y_start, wid
 
     return np.array(output_events, dtype=np.float64)
 
-# based on Sironi's HATS (Histograms of Averaged Time Surfaces) method
-# creates a time surface and then calculates a local average
-def process_hats_descriptor(local_data, time_surface, hats, width, height, tau=0.02, local_timestamp=0.0, block_w=32, block_h=32):
-    for x, y, t, p in local_data:
+def process_hats_descriptor(events, width, height, block_size=16, rho=2, tau=0.03):
+    n_cells_y = (height + block_size - 1) // block_size
+    n_cells_x = (width + block_size - 1) // block_size
+
+    # init grid to store the last time stamp per pixel
+    last_timestamp = np.ones((height, width), dtype=np.float64)
+
+    # init local hats
+    hats = np.zeros((n_cells_y, n_cells_x, 2), dtype=np.float64)
+
+    # init local count per pixel, used for normalization
+    counts = np.zeros((n_cells_y, n_cells_x, 2), dtype=np.int64)
+
+    for x, y, t, p in events:
         ix = int(x)
         iy = int(y)
-        if 0 <= x < width and 0 <= y < height:
-            time_surface[iy, ix] = np.exp(-(local_timestamp - t)/tau)
+        if ix < 0 or ix >= width or iy < 0 or iy >= height:
+            continue
 
-    # compute block averages
-    ny, nx = hats.shape
-    for by in range(ny):
-        for bx in range(nx):
-            patch = time_surface[by*block_h:(by+1)*block_h, bx*block_w:(bx+1)*block_w]
-            hats[by, bx] = patch.mean()
+        # update memory for this pixel
+        last_timestamp[iy, ix] = t
+
+        # init local time surface
+        local_time_surface = np.zeros((2 * rho + 1, 2 * rho + 1), dtype=np.float32)
+
+        for dy in range(-rho, rho + 1):
+            for dx in range(-rho, rho + 1):
+                yy = iy + dy
+                xx = ix + dx
+                if 0 <= xx < width and 0 <= yy < height:
+                    dt = t - last_timestamp[yy, xx]
+                    if dt >= 0:
+                        local_time_surface[dy + rho, dx + rho] = np.exp(-dt / tau)
+                    else:
+                        local_time_surface[dy + rho, dx + rho] = 0.0
+
+        # map pixel to cell
+        cell_x = int(ix // block_size)
+        cell_y = int(iy // block_size)
+        ip = int(p)
+
+        hats[cell_y, cell_x, ip] += local_time_surface.sum()
+        counts[cell_y, cell_x, ip] += 1
+
+    # normalize
+    nonzero = counts > 0
+    hats[nonzero] /= counts[nonzero]
+
+    return hats

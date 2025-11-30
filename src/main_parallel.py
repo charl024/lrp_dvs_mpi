@@ -1,16 +1,19 @@
-from serial_heatmap import serial_heatmap
-from serial_background_filter import serial_background_filter
-from serial_hats import serial_hats
+from parallel_heatmap import parallel_heatmap
+from parallel_background_filter import parallel_background_filter
+from parallel_hats import parallel_hats
 
 from util import get_dataset
 
 def main():
     packet_size = 1000
 
+    process_width = 8
+    process_height = 8
+
     width_large, height_large = 1280, 720
     width_small, height_small = 346, 260
 
-    display = False
+    display = True
 
     small_cam_dataset_path = "test_data/A62P20C3-2021_11_06_18_33_41.npy"
     large_cam_dataset_path = "test_data/Normal_Videos_003_x264.npz"
@@ -18,58 +21,71 @@ def main():
     small_cam_events = get_dataset(small_cam_dataset_path)
     large_cam_events = get_dataset(large_cam_dataset_path)
 
-    # serial_heatmap(
+    # parallel_heatmap(
     #     small_cam_events, 
     #     width_small, 
-    #     height_small, 
+    #     height_small,
+    #     process_width,
+    #     process_height,
     #     packet_size, 
     #     display=display
-    # )
+    #     )
 
-    # serial_heatmap(
+    # parallel_heatmap(
     #     large_cam_events, 
     #     width_large, 
-    #     height_large, 
+    #     height_large,
+    #     process_width,
+    #     process_height,
     #     packet_size, 
     #     display=display
-    # )
+    #     )
 
-    # serial_background_filter(
+    # parallel_background_filter(
     #     small_cam_events, 
     #     width_small, 
-    #     height_small, 
+    #     height_small,
+    #     process_width,
+    #     process_height,
     #     packet_size, 
     #     T_thresh=1000.0, 
     #     display=display
-    # )
+    #     )
 
-    # serial_background_filter(
+    # parallel_background_filter(
     #     large_cam_events, 
     #     width_large, 
     #     height_large, 
+    #     process_width,
+    #     process_height,
     #     packet_size, 
     #     T_thresh=1000.0, 
     #     display=display
-    # )
+    #     )
 
-    # serial_hats(
+    # parallel_hats(
     #     small_cam_events,
     #     width_small,
     #     height_small,
+    #     process_width,
+    #     process_height,
+    #     block_size=8,
     #     packet_size=packet_size,
     #     tau=0.02,
-    #     block_size=32,
-    #     display=True
+    #     display=display
     # )
 
-    serial_hats(
+    parallel_hats(
         large_cam_events,
         width_large,
         height_large,
+        process_width,
+        process_height,
+        block_size=8,
         packet_size=packet_size,
         tau=0.02,
-        block_size=32,
-        display=True
+        rho=2,
+        display=display
     )
 
 

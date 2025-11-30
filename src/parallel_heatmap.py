@@ -4,48 +4,34 @@ import processing as prc
 import matplotlib.pyplot as plt
 import time
 
-W = 346
-H = 260
-
-Pw = 8
-Ph = 8
-
-region_width  = W // Pw
-region_height = H // Ph
-
-packet_size = 1000
-
-def main():
+def parallel_heatmap(events, width, height, process_width, process_height, packet_size=1000, display=False):
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     size = comm.Get_size()
 
-    if Pw * Ph != size:
-        if rank == 0:
-            print("Error: Num Processes must equal ", Pw * Ph)
+    region_width  = width // process_width
+    region_height = height // process_height
+
+    if process_width * process_height != size:
+        print("Error: Num Processes must equal ", process_width * process_height)
         return
 
-    rx = rank % Pw
-    ry = rank // Pw
+    rx = rank % process_width
+    ry = rank // process_width
 
     x_start = rx * region_width
-    x_end = (rx + 1) * region_width if rx != Pw - 1 else W
+    x_end = (rx + 1) * region_width if rx != process_width - 1 else width
 
     y_start = ry * region_height
-    y_end = (ry + 1) * region_height if ry != Ph - 1 else H
+    y_end = (ry + 1) * region_height if ry != process_height - 1 else height
 
-    # print(f"Rank {rank} owns region x[{x_start}:{x_end}], y[{y_start}:{y_end}]")
-
-    if rank == 0:
-        events = np.load("test_data/A62P20C3-2021_11_06_18_33_41.npy")
-        print(f"Rank 0: loaded {len(events)} events")
-        print(f"Rank 0: distributing events in packets of {packet_size}")
+    # init local heatmap
+    local_heatmap = np.zeros((region_height, region_width), dtype=np.int32)
 
     comm.Barrier()
     start_time = MPI.Wtime()
 
     if rank == 0:
-
         # simulate packet stream
         for i in range(0, len(events), packet_size):
             packet = events[i:i+packet_size]
@@ -53,22 +39,19 @@ def main():
             buckets = {r: [] for r in range(size)}
 
             for x, y, t, p in packet:
-                tx = min(x // region_width,  Pw - 1)
-                ty = min(y // region_height, Ph - 1)
-                r  = ty * Pw + tx
+                tx = min(x // region_width,  process_width - 1)
+                ty = min(y // region_height, process_height - 1)
+                r  = ty * process_width + tx
                 buckets[r].append((x, y, t, p))
 
-            # send buckets to other thanks
+            # send buckets to other ranks
             for r in range(1, size):
                 bucket_arr = np.array(buckets[r], dtype=packet.dtype)
                 comm.send(bucket_arr, dest=r, tag=0)
                 # print(f"Rank 0: sent {len(buckets[r])} events to rank {r}")
 
-            # init rank 0's local heatmap
-            local_heatmap = np.zeros((region_height, region_width), dtype=np.int32)
-
             # processing on rank 0
-            local_data_r0 = buckets[0]
+            local_data_r0 = np.array(buckets[0], dtype=packet.dtype)
 
             prc.process_heatmap(
                 local_data=local_data_r0,
@@ -84,12 +67,7 @@ def main():
         for r in range(1, size):
             comm.send(None, dest=r, tag=1)
 
-        # print(f"Rank 0: processed {local_count} events locally")
-
     else:
-
-        # init local heatmap
-        local_heatmap = np.zeros((region_height, region_width), dtype=np.int32)
 
         while True:
             status = MPI.Status()
@@ -128,22 +106,23 @@ def main():
     # calculate total time taken to process, create full_heatmap and then display
     if rank == 0:
         total_time = end_time - start_time
-        print(f"[TIME] Total MPI pipeline time: {total_time:.6f} seconds")
+        print(f"[TIME] MPI Heatmap time: {total_time:.6f} seconds")
 
-        full_heatmap = np.zeros((H, W), dtype=np.int32)
+        full_heatmap = np.zeros((height, width), dtype=np.int32)
+
+        if not display:
+            return
 
         for r in range(size):
-            rx = r % Pw
-            ry = r // Pw
+            rx = r % process_width
+            ry = r // process_width
 
             x0 = rx * region_width
             y0 = ry * region_height
 
             full_heatmap[y0:y0+region_height, x0:x0+region_width] = recvbuf[r]
 
-        plt.imshow(full_heatmap, cmap="hot")
+        full_heatmap_log = np.log1p(full_heatmap)
+        plt.imshow(full_heatmap_log, cmap="hot")
         plt.colorbar()
         plt.show()
-
-if __name__ == "__main__":
-    main()

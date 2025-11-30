@@ -21,11 +21,14 @@ def transform_to_heatmap(filtered_data, width, height):
 
 
 def serial_background_filter(events, width, height, packet_size=1000, T_thresh=2000.0, display=False):
+
+    # grid of local timestamps
     local_timestamp = np.full((height, width), -1.0, dtype=np.float64)
 
     # start time
     start_time = time.perf_counter()
 
+    # to store filtered events
     filtered = []
 
     for i in range(0, len(events), packet_size):
@@ -42,12 +45,13 @@ def serial_background_filter(events, width, height, packet_size=1000, T_thresh=2
         
         filtered.append(out)
     
+    # combine all arrays of filtered events
     filtered = np.concatenate(filtered, axis=0)
 
     # end time
     end_time = time.perf_counter()
     total_time = end_time - start_time
-    print(f"[TIME] Serial background filtering time: {total_time:.6f} seconds")
+    print(f"[TIME] Serial Background Filtering time: {total_time:.6f} seconds")
 
     if not display:
         return

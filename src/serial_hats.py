@@ -1,50 +1,52 @@
 import numpy as np
 import processing as prc
 import matplotlib.pyplot as plt
+import time
 
-W = 346
-H = 260
+def serial_hats(events, width, height, packet_size=1000, tau=0.02, rho=2, block_size=32, display=False):
 
-packet_size = 1000
+    # number of cells
+    n_cells_y = (height + block_size - 1) // block_size
+    n_cells_x = (width + block_size - 1) // block_size
 
-def main():
-    events = np.load("test_data/A62P20C3-2021_11_06_18_33_41.npy")
+    # init hats
+    hats_total = np.zeros((n_cells_y, n_cells_x, 2), dtype=np.float64)
 
-    print(f"Loaded {len(events)} events")
-    print(f"Packet Size: {packet_size}")
+    # start time
+    start = time.perf_counter()
 
-    # time surface init
-    time_surface = np.zeros((H, W), dtype=np.float64)
-
-    # HATS block size and init
-    block_w = W // 32
-    block_h = H // 32
-    hats = np.zeros((H // block_h, W // block_w), dtype=np.float64)
-
+    # simulate packet stream
     for i in range(0, len(events), packet_size):
         packet = events[i:i+packet_size]
-        # set current timestamp to the last timestamp stored in packet
-        t_current = packet[-1][2]
 
-        prc.process_hats_descriptor(
-            local_data=packet,
-            time_surface=time_surface,
-            hats=hats,
-            width=W,
-            height=H,
-            tau=0.02,
-            local_timestamp=t_current,
-            block_w=block_w,
-            block_h=block_h
+        hats_patch = prc.process_hats_descriptor(
+            events=packet,
+            width=width,
+            height=height,
+            block_size=block_size,
+            rho=rho,
+            tau=tau
         )
+
+        hats_total += hats_patch
+
+    # end time
+    end = time.perf_counter()
+    total = end - start
+
+    print(f"[TIME] Serial HATS descriptor time: {total:.6f} seconds")
+
+    if not display:
+        return
+
+    # visualization
+    hats_pos = hats_total[:, :, 1]
+    hats_neg = hats_total[:, :, 0]
+    hats_sum = hats_pos + hats_neg
 
     plt.figure(figsize=(8, 6))
     plt.title("HATS Descriptor (Block-Averaged Time Surface)")
-    plt.imshow(hats, cmap='hot')
-    plt.colorbar(label="HATS Value")
-    plt.xlabel("HATS Block X")
-    plt.ylabel("HATS Block Y")
+    # plt.subplot(1, 3, 3)
+    plt.imshow(hats_sum, cmap="hot")
+    plt.colorbar()
     plt.show()
-
-if __name__ == "__main__":
-    main()
