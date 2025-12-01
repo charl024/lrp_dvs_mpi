@@ -1,0 +1,120 @@
+Iteration 1
+Running with 64 processes
+To request GPUs, add --gpus-per-node X or --gpus X, where X is the desired number of GPUs.
+Job 149828 running on easley[036,039]
+[TIME] MPI Heatmap time: 0.182753 seconds
+[TIME] MPI Heatmap time: 13.539399 seconds
+[TIME] MPI Background Filtering time: 0.177272 seconds
+[TIME] MPI Background Filtering time: 13.682372 seconds
+[TIME] MPI HATS time: 0.392754 seconds
+[TIME] MPI HATS time: 34.040669 seconds
+Running with 32 (8x4) processes
+[TIME] MPI Heatmap time: 0.143656 seconds
+[TIME] MPI Heatmap time: 12.018519 seconds
+[TIME] MPI Background Filtering time: 0.155971 seconds
+[TIME] MPI Background Filtering time: 12.345369 seconds
+[TIME] MPI HATS time: 0.662859 seconds
+[TIME] MPI HATS time: 48.032799 seconds
+Running with 32 (4x8) processes
+[TIME] MPI Heatmap time: 0.145390 seconds
+[TIME] MPI Heatmap time: 11.386312 seconds
+[TIME] MPI Background Filtering time: 0.146767 seconds
+[TIME] MPI Background Filtering time: 11.580008 seconds
+[TIME] MPI HATS time: 0.538761 seconds
+[TIME] MPI HATS time: 41.718551 seconds
+Running with 16 processes
+[TIME] MPI Heatmap time: 0.139876 seconds
+[TIME] MPI Heatmap time: 10.812200 seconds
+[TIME] MPI Background Filtering time: 0.143144 seconds
+[TIME] MPI Background Filtering time: 11.439648 seconds
+[TIME] MPI HATS time: 0.862147 seconds
+[TIME] MPI HATS time: 53.866942 seconds
+Running with 4 processes
+[TIME] MPI Heatmap time: 0.135203 seconds
+[TIME] MPI Heatmap time: 12.531193 seconds
+[TIME] MPI Background Filtering time: 0.154267 seconds
+[TIME] MPI Background Filtering time: 18.495920 seconds
+[TIME] MPI HATS time: 1.527723 seconds
+[TIME] MPI HATS time: 100.445222 seconds
+Running serial
+[TIME] Serial Heatmap time: 0.096572 seconds
+[TIME] Serial Heatmap time: 7.699360 seconds
+[TIME] Serial Background Filtering time: 0.288687 seconds
+[TIME] Serial Background Filtering time: 26.260305 seconds
+[TIME] Serial HATS descriptor time: 3.301293 seconds
+[TIME] Serial HATS descriptor time: 274.758452 seconds
+----------------------------------------
+Iteration 2
+Running with 64 processes
+[TIME] MPI Heatmap time: 0.184614 seconds
+[TIME] MPI Heatmap time: 13.418078 seconds
+[TIME] MPI Background Filtering time: 0.174116 seconds
+[TIME] MPI Background Filtering time: 13.598580 seconds
+[TIME] MPI HATS time: 0.393732 seconds
+[TIME] MPI HATS time: 34.020879 seconds
+Running with 32 (8x4) processes
+[TIME] MPI Heatmap time: 0.146015 seconds
+[TIME] MPI Heatmap time: 12.315785 seconds
+[TIME] MPI Background Filtering time: 0.161670 seconds
+[TIME] MPI Background Filtering time: 12.624397 seconds
+[TIME] MPI HATS time: 0.660865 seconds
+[TIME] MPI HATS time: 48.064921 seconds
+Running with 32 (4x8) processes
+[TIME] MPI Heatmap time: 0.147649 seconds
+[TIME] MPI Heatmap time: 11.949361 seconds
+[TIME] MPI Background Filtering time: 0.151449 seconds
+[TIME] MPI Background Filtering time: 12.129263 seconds
+[TIME] MPI HATS time: 0.540046 seconds
+[TIME] MPI HATS time: 37.849681 seconds
+Running with 16 processes
+[TIME] MPI Heatmap time: 0.136368 seconds
+[TIME] MPI Heatmap time: 10.832262 seconds
+[TIME] MPI Background Filtering time: 0.140218 seconds
+[TIME] MPI Background Filtering time: 11.443996 seconds
+[TIME] MPI HATS time: 0.860533 seconds
+[TIME] MPI HATS time: 53.752529 seconds
+Running with 4 processes
+[TIME] MPI Heatmap time: 0.136003 seconds
+[TIME] MPI Heatmap time: 12.568854 seconds
+[TIME] MPI Background Filtering time: 0.153616 seconds
+[TIME] MPI Background Filtering time: 18.528910 seconds
+[TIME] MPI HATS time: 1.518284 seconds
+[TIME] MPI HATS time: 100.240264 seconds
+Running serial
+[TIME] Serial Heatmap time: 0.095730 seconds
+[TIME] Serial Heatmap time: 7.755396 seconds
+[TIME] Serial Background Filtering time: 0.289497 seconds
+[TIME] Serial Background Filtering time: 26.022515 seconds
+[TIME] Serial HATS descriptor time: 3.280057 seconds
+[TIME] Serial HATS descriptor time: 273.836965 seconds
+----------------------------------------
+Iteration 3
+Running with 64 processes
+[TIME] MPI Heatmap time: 0.183573 seconds
+[TIME] MPI Heatmap time: 13.621585 seconds
+[TIME] MPI Background Filtering time: 0.176197 seconds
+[TIME] MPI Background Filtering time: 13.807564 seconds
+[TIME] MPI HATS time: 0.392404 seconds
+[TIME] MPI HATS time: 33.939835 seconds
+Running with 32 (8x4) processes
+[TIME] MPI Heatmap time: 0.145156 seconds
+[TIME] MPI Heatmap time: 12.054396 seconds
+[TIME] MPI Background Filtering time: 0.156929 seconds
+[TIME] MPI Background Filtering time: 12.326224 seconds
+[TIME] MPI HATS time: 0.658549 seconds
+[TIME] MPI HATS time: 47.952031 seconds
+Running with 32 (4x8) processes
+[TIME] MPI Heatmap time: 0.145087 seconds
+[TIME] MPI Heatmap time: 11.412765 seconds
+[TIME] MPI Background Filtering time: 0.149752 seconds
+[TIME] MPI Background Filtering time: 11.611928 seconds
+[TIME] MPI HATS time: 0.539378 seconds
+[TIME] MPI HATS time: 37.745666 seconds
+Running with 16 processes
+[TIME] MPI Heatmap time: 0.136797 seconds
+[TIME] MPI Heatmap time: 10.801674 seconds
+[TIME] MPI Background Filtering time: 0.139067 seconds
+[TIME] MPI Background Filtering time: 11.354445 seconds
+[TIME] MPI HATS time: 0.860289 seconds
+[TIME] MPI HATS time: 53.712362 seconds
+Running with 4 processes

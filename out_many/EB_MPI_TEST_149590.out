@@ -1,0 +1,18 @@
+Iteration 1
+Running with 64 processes
+To request GPUs, add --gpus-per-node X or --gpus X, where X is the desired number of GPUs.
+Job 149590 running on easley[006,039]
+[TIME] MPI Heatmap time: 0.212305 seconds
+[TIME] MPI Heatmap time: 13.011403 seconds
+[TIME] MPI Background Filtering time: 0.167642 seconds
+[TIME] MPI Background Filtering time: 13.095171 seconds
+[TIME] MPI HATS time: 0.405604 seconds
+[TIME] MPI HATS time: 33.856721 seconds
+Running with 32 (8x4) processes
+[TIME] MPI Heatmap time: 0.144577 seconds
+[TIME] MPI Heatmap time: 11.725028 seconds
+[TIME] MPI Background Filtering time: 0.152980 seconds
+[TIME] MPI Background Filtering time: 11.948522 seconds
+[TIME] MPI HATS time: 0.634763 seconds
+[TIME] MPI HATS time: 47.826046 seconds
+Running with 32 (4x8) processes

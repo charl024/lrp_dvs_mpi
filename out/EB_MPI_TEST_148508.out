@@ -1,0 +1,24 @@
+Running with 64 processes
+To request GPUs, add --gpus-per-node X or --gpus X, where X is the desired number of GPUs.
+Job 148508 running on easley[039-040]
+[TIME] MPI HATS time: 0.417904 seconds
+[TIME] MPI HATS time: 32.336047 seconds
+Running with 32 (8x4) processes
+[TIME] MPI HATS time: 0.620567 seconds
+[TIME] MPI HATS time: 45.065126 seconds
+Running with 32 (4x8) processes
+[TIME] MPI HATS time: 0.548536 seconds
+[TIME] MPI HATS time: 41.197984 seconds
+Running with 16 processes
+[TIME] MPI HATS time: 0.876966 seconds
+[TIME] MPI HATS time: 53.972447 seconds
+Running with 4 processes
+[TIME] MPI HATS time: 1.543322 seconds
+[TIME] MPI HATS time: 103.023402 seconds
+Running serial
+[TIME] Serial Heatmap time: 0.095271 seconds
+[TIME] Serial Heatmap time: 7.706428 seconds
+[TIME] Serial Background Filtering time: 0.287552 seconds
+[TIME] Serial Background Filtering time: 26.055843 seconds
+[TIME] Serial HATS descriptor time: 3.292920 seconds
+[TIME] Serial HATS descriptor time: 273.646406 seconds
