@@ -1,11 +1,11 @@
 #!/bin/bash
-#SBATCH --job-name=EB_MPI
+#SBATCH --job-name=DVS_MPI
 #SBATCH --partition=general
 #SBATCH --nodes=2
 #SBATCH --ntasks-per-node=32
-#SBATCH --time=00:30:00
-#SBATCH --output=./out_many/EB_MPI_TEST_%j.out
-#SBATCH --error=./out_many/EB_MPI_TEST_%j.err
+#SBATCH --time=01:30:00
+#SBATCH --output=./out_many/DV_MPI_TEST_%j.out
+#SBATCH --error=./out_many/DV_MPI_TEST_%j.err
 
 module load miniconda3
 module load openmpi
@@ -13,7 +13,7 @@ module load openmpi
 source $(conda info --base)/etc/profile.d/conda.sh
 conda activate dv
 
-N=10
+N=5
 
 for ((i=1; i<=N; i++)); do
     echo "Iteration $i"

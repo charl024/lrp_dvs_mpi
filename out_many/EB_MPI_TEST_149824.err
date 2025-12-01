@@ -1,0 +1,7 @@
+This Miniconda3 installation uses the conda-forge channel. Conda-forge packages
+are generally open-source and free for research and educational use. Be sure to
+review the license agreements of software packages you install and additional
+channels you enable. 
+srun: error: Unable to confirm allocation for job 149824: Socket timed out on send/recv operation
+srun: Check SLURM_JOB_ID environment variable. Expired or invalid job 149824
+slurmstepd: error: *** JOB 149824 ON easley006 CANCELLED AT 2025-11-30T19:44:49 DUE TO TIME LIMIT ***
