@@ -1,0 +1,5 @@
+This Miniconda3 installation uses the conda-forge channel. Conda-forge packages
+are generally open-source and free for research and educational use. Be sure to
+review the license agreements of software packages you install and additional
+channels you enable. 
+/var/spool/slurmd/job149588/slurm_script: line 16: N: command not found
