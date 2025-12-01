@@ -34,10 +34,7 @@
 
 # Executables
 *.exe
-*.out
 *.app
 
 # debug information files
 *.dwo
-
-src/__pycache__
