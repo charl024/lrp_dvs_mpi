@@ -1,4 +1,4 @@
-# Local Region Parallelism in Dynamic Vision Sensors using MPI
+# Distributed Local-Region Event Processing for Dynamic Vision Sensors with MPI
 ## What is this?
 This is a demonstration of how parallelism can be applied processing asynchronous event data streams from a neuromorphic vision sensor using MPI. In this project, we simulate an incoming stream of event packets from a sensor by iterating through an event-based dataset and applying different types of processing approaches for each packet.
 
