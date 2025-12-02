@@ -1,0 +1,6 @@
+This Miniconda3 installation uses the conda-forge channel. Conda-forge packages
+are generally open-source and free for research and educational use. Be sure to
+review the license agreements of software packages you install and additional
+channels you enable. 
+slurmstepd: error: *** JOB 150453 ON easley018 CANCELLED AT 2025-12-01T11:18:25 DUE TO TIME LIMIT ***
+slurmstepd: error: *** STEP 150453.24 ON easley019 CANCELLED AT 2025-12-01T11:18:25 DUE TO TIME LIMIT ***
