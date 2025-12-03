@@ -1,0 +1,4 @@
+Iteration 1
+Running with 64 processes
+To request GPUs, add --gpus-per-node X or --gpus X, where X is the desired number of GPUs.
+Job 152030 running on easley[001,006]
